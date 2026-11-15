@@ -1,0 +1,32 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. LEAP.
+       ENVIRONMENT DIVISION.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 WS-YEAR      PIC 9(4) VALUE ZEROS.
+       01 WS-RESULT    PIC 9(1) VALUE ZEROS.
+       01 WS-CALC      PIC 9(4) COMP VALUE ZEROS.
+       01 WS-REMAINDER PIC 9(3) COMP VALUE ZEROS.
+       PROCEDURE DIVISION.
+       LEAP.
+         MOVE ZEROS    TO WS-RESULT.
+         DIVIDE WS-YEAR BY 4 GIVING WS-CALC REMAINDER WS-REMAINDER.
+         IF WS-REMAINDER EQUALS ZEROS
+            DIVIDE WS-YEAR BY 100 GIVING WS-CALC REMAINDER WS-REMAINDER
+            IF WS-REMAINDER EQUALS ZEROS
+               DIVIDE WS-YEAR BY 400 GIVING WS-CALC
+                        REMAINDER WS-REMAINDER
+               IF WS-REMAINDER EQUALS ZEROS
+                  MOVE 1  TO WS-RESULT
+               ELSE
+                  MOVE 0  TO WS-RESULT
+               END-IF
+            ELSE
+               MOVE 1  TO WS-RESULT
+            END-IF
+         ELSE
+            MOVE 0     TO WS-RESULT
+         END-IF.
+         CONTINUE.
+       LEAP-EXIT.
+         EXIT.
