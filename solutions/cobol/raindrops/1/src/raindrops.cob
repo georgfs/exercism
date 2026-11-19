@@ -1,0 +1,45 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. raindrops.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 WS-NUMBER PIC 9(4).
+       01 WS-REM PIC 9(4).
+       01 WS-VARS.
+          05 WS-RESULT PIC X(20).
+          05 WS-PLING PIC X(5).
+          05 WS-PLANG PIC X(5).
+          05 WS-PLONG PIC X(5).
+          05 WS-OTHER PIC X(4).
+
+       PROCEDURE DIVISION.
+       RAINDROPS.
+
+       INITIALIZE WS-VARS REPLACING ALPHANUMERIC BY SPACES.
+      
+       MOVE FUNCTION REM(WS-NUMBER 3) TO WS-REM.
+       IF WS-REM EQUAL ZEROS
+          MOVE "Pling" TO WS-PLING
+       END-IF.
+
+       MOVE FUNCTION REM(WS-NUMBER 5) TO WS-REM.
+       IF WS-REM EQUAL ZEROS
+          MOVE "Plang" TO WS-PLANG
+       END-IF.
+
+       MOVE FUNCTION REM(WS-NUMBER 7) TO WS-REM.
+       IF WS-REM EQUAL ZEROS
+          MOVE "Plong" TO WS-PLONG
+       END-IF.
+       
+       STRING WS-PLING DELIMITED BY SPACE
+              WS-PLANG DELIMITED BY SPACE
+              WS-PLONG DELIMITED BY SPACE
+          INTO WS-RESULT
+       END-STRING.
+       
+       IF WS-RESULT EQUAL SPACES
+          MOVE WS-NUMBER TO WS-OTHER
+          MOVE WS-OTHER TO WS-RESULT
+       END-IF.
+       
+       DISPLAY WS-RESULT.
